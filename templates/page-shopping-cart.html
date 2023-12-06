@@ -1,7 +1,7 @@
 {% extends 'header.html' %}
 
 {% block content %}
-
+{% load mathfilters %}
 <!-- ========================= SECTION CONTENT ========================= -->
 <section class="section-content padding-y">
 <div class="container">
@@ -20,10 +20,11 @@
 </tr>
 </thead>
 <tbody>
+{% for item in itemlar %}
 <tr>
 	<td>
 		<figure class="itemside">
-			<div class="aside"><img src="{{i.rasm.url}}" class="img-sm"></div>
+			<div class="aside"><img src="{{item.mahsulot.media_set.first.rasm.url}}" class="img-sm"></div>
 			<figcaption class="info">
 				<a href="#" class="title text-dark">Mahsulot nomi</a>
 				<p class="text-muted small">Size: XL, Color: blue, <br> Brand: {{savat.mahsulot.detal.brend}}</p>
@@ -43,7 +44,7 @@
 	</td>
 	<td> 
 		<div class="price-wrap"> 
-			<var class="price">$69</var>
+			<var class="price">$ {{ item.miqdor|mul:item.mahsulot.narx }}</var>
 			<small  class="text-muted"> $23 each </small>
 		</div> <!-- price-wrap .// -->
 	</td>
@@ -52,6 +53,7 @@
 	<a href="/ochirish/{{savat.id}}/" class="btn btn-light btn-round"> Remove</a>
 	</td>
 </tr>
+{% endfor %}
 </tbody>
 </table>
 
